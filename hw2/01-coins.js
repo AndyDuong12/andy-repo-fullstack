@@ -31,14 +31,14 @@ function calculateChange(amount) {
       // Getting the floor. For example: 462 / 100 = 4 dollars
       let count = Math.floor(cents / coin.value);
       if (count > 0) {
-        // Special case for penny to change pennies for plural, for others just add "s" add the end
+        // Special case for penny to change to pennies for plural, for others just add "s" add the end
         const coinName =
           coin.name === "penny" && count > 1
             ? "pennies"
             : coin.name + (count > 1 ? "s" : "");
         result.push(`${count} ${coinName}`);
         // Using modular to get the remainder and continue looping through the "coins" object.
-        // For example: 462 % 100 = 62; 62 % 25 = 2; and so on
+        // For example: 462 % 100 = 62; 62 % 25 = 12; and so on
         cents %= coin.value;
       }
     }
