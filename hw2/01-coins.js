@@ -2,6 +2,7 @@
 
 // Add your function here
 function calculateChange(amount) {
+    // Check for cases where the input is > 100 or <= 0
   if (amount > 100) {
     return `$${amount} ==> Error: the number is too large`;
   }
@@ -12,6 +13,7 @@ function calculateChange(amount) {
     return `$${amount} ==> 0 dollars`;
   }
 
+  // coins object to store different types of coins
   const coins = [
     { name: "dollar", value: 100 },
     { name: "quarter", value: 25 },
@@ -23,8 +25,10 @@ function calculateChange(amount) {
   let cents = amount * 100; // Convert dollars to cents
   let result = [];
 
+  // Looping through the coins object and compare its value with cents
   for (let coin of coins) {
     if (cents >= coin.value) {
+      // Getting the floor. For example: 462 / 100 = 4 dollars
       let count = Math.floor(cents / coin.value);
       if (count > 0) {
         // Special case for penny to change pennies for plural, for others just add "s" add the end
@@ -33,6 +37,8 @@ function calculateChange(amount) {
             ? "pennies"
             : coin.name + (count > 1 ? "s" : "");
         result.push(`${count} ${coinName}`);
+        // Using modular to get the remainder and continue looping through the "coins" object.
+        // For example: 462 % 100 = 62; 62 % 25 = 2; and so on
         cents %= coin.value;
       }
     }
