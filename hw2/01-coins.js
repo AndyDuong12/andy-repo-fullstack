@@ -1,6 +1,45 @@
 /** Exercise 01 - Coins **/
 
-// Add your function here 
+// Add your function here
+function calculateChange(amount) {
+  if (amount > 100) {
+    return `$${amount} ==> Error: the number is too large`;
+  }
+  if (amount < 0) {
+    return `$${amount} ==> Error: the number is too small`;
+  }
+  if (amount === 0) {
+    return `$${amount} ==> 0 dollars`;
+  }
+
+  const coins = [
+    { name: "dollar", value: 100 },
+    { name: "quarter", value: 25 },
+    { name: "dime", value: 10 },
+    { name: "nickel", value: 5 },
+    { name: "penny", value: 1 },
+  ];
+
+  let cents = amount * 100; // Convert dollars to cents
+  let result = [];
+
+  for (let coin of coins) {
+    if (cents >= coin.value) {
+      let count = Math.floor(cents / coin.value);
+      if (count > 0) {
+        // Special case for penny to change pennies for plural, for others just add "s" add the end
+        const coinName =
+          coin.name === "penny" && count > 1
+            ? "pennies"
+            : coin.name + (count > 1 ? "s" : "");
+        result.push(`${count} ${coinName}`);
+        cents %= coin.value;
+      }
+    }
+  }
+
+  return `$${amount} ==> ${result.join(", ")}`;
+}
 
 // Sample test cases
 console.log(calculateChange(4.62));
@@ -10,4 +49,9 @@ console.log(calculateChange(0.16));
 console.log(calculateChange(150.11));
 // $150.11 ==> Error: the number is too large
 
-// Add additional test cases here 
+// Add additional test cases here
+console.log(calculateChange(0.1));
+console.log(calculateChange(-2.5));
+console.log(calculateChange(100.0));
+console.log(calculateChange(0.0));
+console.log(calculateChange(49.84));
