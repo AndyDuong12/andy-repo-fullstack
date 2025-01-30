@@ -62,6 +62,10 @@ app.get("/cookie", (req, res) => {
   res.send("cookies... yummm");
 });
 
+app.use((req, res, next) => {
+  res.status(400).send("404: Page not found");
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
