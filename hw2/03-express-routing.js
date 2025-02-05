@@ -64,7 +64,7 @@ app.get("/cookie", (req, res) => {
 
 // Other routes
 app.use((req, res, next) => {
-  res.status(400).send("404: Page not found");
+  res.status(404).send("404: Page not found");
 });
 
 app.listen(port, () => {
