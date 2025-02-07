@@ -67,7 +67,7 @@ app.post("/submit", (req, res) => {
 
   res.write(`<p>Name: ${req.body.name}`);
   res.write(`<p>Email: ${req.body.email}`);
-  res.write(`<p>Comments: ${req.body.comments}`);
+  res.write(`<p>Comments: ${!req.body.comments ? "n/a" : req.body.comments}`);
   res.write(`<p>Newsletter: ${req.body.newsletter}`);
   res.end();
 });
